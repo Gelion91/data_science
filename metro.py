@@ -1,9 +1,6 @@
 import json
 import csv
-
-
 from geopy.distance import geodesic
-
 
 subway = []
 with open('metro.json', 'r', encoding='cp1251') as f:
@@ -14,7 +11,6 @@ with open('metro.json', 'r', encoding='cp1251') as f:
             'name': i['NameOfStation'],
             'coordinates': i['geoData']['coordinates']})
 
-
 station = []
 with open('data-398-2019-12-31.csv', 'r', encoding='cp1251') as file:
     reader = csv.DictReader(file, delimiter=';')
@@ -23,13 +19,11 @@ with open('data-398-2019-12-31.csv', 'r', encoding='cp1251') as file:
             'name': row['Name'],
             'coordinates': [row['Longitude_WGS84'], row['Latitude_WGS84']]})
 
-
 for i in station:
     try:
         a = list(map(float, i['coordinates']))
     except ValueError:
         station.remove(i)
-
 
 resultation = {}
 for result in subway:
